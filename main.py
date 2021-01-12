@@ -36,7 +36,7 @@ model = keras.Model(inputs, outputs)
 # Checking the model info
 model.summary()
 
-model.compile(loss=keras.losses.BinaryCrossentropy(from_logits=True), metrics=[keras.metrics.BinaryAccuracy()])
+model.compile(loss=keras.losses.BinaryCrossentropy(from_logits=True), metrics=[keras.metrics.CategoricalAccuracy()])
 
 # augment the data.
 datagen = ImageDataGenerator(
@@ -52,13 +52,13 @@ datagen = ImageDataGenerator(
 train_it = datagen.flow_from_directory('fruits/train/',
                                        target_size=(224, 224),
                                        color_mode='rgb',
-                                       class_mode='binary',
+                                       class_mode='categorical',
                                        batch_size=8)
 # load and iterate test dataset
 test_it = datagen.flow_from_directory('fruits/test/',
                                       target_size=(224, 224),
                                       color_mode='rgb',
-                                      class_mode='binary',
+                                      class_mode='categorical',
                                       batch_size=8)
 
 # unfreeze the model
